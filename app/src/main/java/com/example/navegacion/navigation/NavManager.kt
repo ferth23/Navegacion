@@ -11,27 +11,40 @@ import com.example.navegacion.views.HomeView
 import com.example.navegacion.views.NewView
 
 @Composable
-fun NavManager(){
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "Home"  ){
-        composable("Home"){
-            HomeView(navController)
+fun NavManager () {
+    val navController = rememberNavController ()
+    NavHost (
+        navController = navController,
+        startDestination = "Home"
+    ) {
+        composable (
+            route = "Home"
+        ) {
+            HomeView ( navController )
         }
-        composable("Detail/{id}/?{opcional}", arguments = listOf(
-            navArgument("id") { type = NavType.IntType },
-            navArgument("opcional") { type = NavType.StringType },
-        )){
-            val id = it.arguments?.getInt("id") ?: 0
-            val opcional = it.arguments?.getString("opcional") ?: ""
-            DetailView(navController, id, opcional)
+
+        composable (
+            route = "Detail/{id}/?{opcional}",
+            arguments = listOf (
+                navArgument ( name = "id" ) { type = NavType.IntType },
+                navArgument ( name = "opcional") { type = NavType.StringType },
+            )
+        ) {
+            val id = it.arguments?.getInt( "id" ) ?: 0
+            val opcional = it.arguments?.getString( "opcional" ) ?: ""
+            DetailView ( navController, id, opcional )
         }
-        composable("New/{id}/?{opcional}", arguments = listOf(
-            navArgument("id") { type = NavType.IntType },
-            navArgument("opcional") { type = NavType.StringType },
-        )){
-            val id = it.arguments?.getInt("id") ?: 0
-            val opcional = it.arguments?.getString("opcional") ?: ""
-            NewView(navController, id, opcional)
+
+        composable (
+            route = "New/{id}/?{opcional}",
+            arguments = listOf (
+                navArgument( name = "id" ) { type = NavType.IntType },
+                navArgument( name = "opcional" ) { type = NavType.StringType },
+            )
+        ) {
+            val id = it.arguments?.getInt( "id" ) ?: 0
+            val opcional = it.arguments?.getString( "opcional" ) ?: ""
+            NewView ( navController, id, opcional )
         }
     }
 }

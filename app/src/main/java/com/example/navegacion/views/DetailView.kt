@@ -10,7 +10,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -28,44 +27,54 @@ import com.example.navegacion.components.TitleView
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun DetailView(navController: NavController, id: Int, opcional: String?) {
-    Scaffold(
+fun DetailView ( navController: NavController, id: Int, opcional: String? ) {
+    Scaffold (
         topBar = {
-            TopAppBar(
-                title = { TitleBar(name = "Detail view") },
-                colors = TopAppBarDefaults.mediumTopAppBarColors(
+            TopAppBar (
+                title = { TitleBar ( name = "Detail view" ) },
+                colors = TopAppBarDefaults.mediumTopAppBarColors (
                     containerColor = Color.Blue
                 ),
                 navigationIcon = {
-                    MainIconButton(icon = Icons.Default.ArrowBack) {
+                    MainIconButton ( icon = Icons.Default.ArrowBack ) {
                         navController.popBackStack()
                     }
                 }
             )
         }
     ) {
-        ContentDetailView(navController, id, opcional)
+        ContentDetailView ( navController, id, opcional )
     }
 }
 
 @Composable
-fun ContentDetailView(navController: NavController, id: Int, opcional: String?) {
-    Column(
+fun ContentDetailView ( navController: NavController, id: Int, opcional: String? ) {
+    Column (
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TitleView(name = "Detail View")
+        TitleView ( name = "Detail View" )
+
         Space()
-        TitleView(name = id.toString())
+
+        TitleView ( name = id.toString() )
+
         Space()
-        if (opcional == ""){
-            Spacer(modifier = Modifier.height(0.dp))
-        }else{
-            TitleView(name = opcional.orEmpty())
+
+        if ( opcional == "" ) {
+            Spacer ( modifier = Modifier.height ( 0.dp ) )
+        } else {
+            TitleView ( name = opcional.orEmpty() )
         }
+
         Space()
-        MainButton(name = "New View", backColor = Color.Blue, color = Color.White) {
+
+        MainButton (
+            name = "New View",
+            backColor = Color.Blue,
+            color = Color.White
+        ) {
             navController.navigate ( "New/${id}/?${opcional}" )
         }
     }
