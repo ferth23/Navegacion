@@ -63,6 +63,7 @@ fun ContentHomeView(navController: NavController) {
             onValueChange = { opcional = it },
             label = { Text(text = "Opcional") }
         )
+        Space()
         MainButton(name = "Detail view", backColor = Color.Red, color = Color.White) {
             navController.navigate("Detail/${id}/?${opcional}")
         }
